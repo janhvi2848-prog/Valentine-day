@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Be My Valentine? 💘</title>
+
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      color: #ff4d6d;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: transform 0.2s;
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #adb5bd;
+      color: white;
+      position: absolute;
+      animation: shake 0.4s infinite;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0); }
+      25% { transform: translate(-2px, 2px); }
+      50% { transform: translate(2px, -2px); }
+      75% { transform: translate(-2px, -2px); }
+      100% { transform: translate(0); }
+    }
+
+    #surprise {
+      display: none;
+      margin-top: 20px;
+    }
+
+    img {
+      width: 250px;
+      border-radius: 15px;
+    }
+
+    .no-text {
+      position: fixed;
+      color: #ff4d6d;
+      font-size: 20px;
+      font-weight: bold;
+      pointer-events: none;
+      animation: fadeOut 1.5s forwards;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; transform: translateY(-20px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Will you be my Valentine? 💖</h1>
+
+    <button id="yesBtn" onclick="sayYes()">Yes 💕</button>
+    <button id="noBtn" onmouseover="escapeNo()">No 💔</button>
+
+    <div id="surprise">
+      <h2>YAY!!! I knew it 😘💘</h2>
+      <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Surprise">
+    </div>
+  </div>
+
+  <script>
+    const phrases = [
+      "HEY 😳",
+      "EXCUSE YOU?",
+      "ABSOLUTELY NOT",
+      "WRONG BUTTON",
+      "TRY AGAIN 😈",
+      "NOPE NOPE NOPE",
+      "DON’T EVEN THINK ABOUT IT",
+      "BE SERIOUS 😤"
+    ];
+
+    function escapeNo() {
+      const noBtn = document.getElementById("noBtn");
+
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+      noBtn.style.transform = "scale(0.8) rotate(" + (Math.random() * 30 - 15) + "deg)";
+
+      spawnText();
+    }
+
+    function spawnText() {
+      const text = document.createElement("div");
+      text.className = "no-text";
+      text.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+
+      text.style.left = Math.random() * window.innerWidth + "px";
+      text.style.top = Math.random() * window.innerHeight + "px";
+
+      document.body.appendChild(text);
+
+      setTimeout(() => {
+        text.remove();
+      }, 1500);
+    }
+
+    function sayYes() {
+      document.getElementById("surprise").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
